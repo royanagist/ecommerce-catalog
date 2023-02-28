@@ -67,7 +67,7 @@ export default {
 }
 .card .detail .title{
   height: 12vh;
-  overflow: hidden;
+  overflow: scroll;
 }
 .card .detail .title p{
   font-size: 28px;
@@ -101,7 +101,7 @@ export default {
 }
 .card .detail .desc {
   height: 33vh;
-  overflow: hidden;
+  overflow: scroll;
 }
 .card .detail .desc p{
   font-size: 20px;
