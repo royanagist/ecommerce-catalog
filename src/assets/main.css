@@ -1,0 +1,21 @@
+:root {
+  --blue: #002772;
+  --pink: #720060;
+  --white: #FFFFFF;
+  --white: #FFFFFF;
+  --bg-women: #FDE2FF;
+  --bg-men: #D6E6FF;
+  --bg-neither: #D8D7D7;
+  --text-desc: #1E1E1E;
+  --text-title: #3F3F3F;
+
+}
+
+* {
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  margin: 0 auto ;
+}
+
