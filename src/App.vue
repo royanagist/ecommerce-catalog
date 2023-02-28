@@ -1,106 +1,136 @@
 <script>
 import axios from "axios";
+import DetailComponent from "./components/DetailComponent.vue";
+import ImageComponent from "./components/ImageComponent.vue";
+import UnavailableView from "./components/UnavailableView.vue";
 
 export default{
-  data(){
-    return{
-      Women: false,
-      Men: false,
-      Neither: false,
-      productIndex: 1,
-      product: {},
-      loading: false,
-    }
-  },
-  methods: {
-    async fetchData() {
-      this.loading = true;
-      console.log(this.loading);
-      try {
-        if (this.productIndex < 20) {
-          ++this.productIndex ;
-        } else {
-          this.productIndex = 1 ;
-        }
-        const { data } = await axios({
-          url: `https://fakestoreapi.com/products/${this.productIndex}`,
-          method: "get",
-        });
-        this.product = data;
-        this.loading = false;
-        this.changeClass();
-        console.log(this.loading);
-      } catch (error) {
-        console.log(error);
-      }
+    data() {
+        return {
+            women: false,
+            men: false,
+            neither: false,
+            productIndex: 1,
+            product: {},
+            loading: false,
+            oneStar: false,
+            twoStar: false,
+            threeStar: false,
+            fourStar: false,
+            fiveStar: false,
+        };
     },
-    changeClass() {
-      if(this.product.category === "women's clothing"){
-        this.Women = true;
-        this.Men = false;
-        this.Neither =false;
-      } else if (this.product.category === "men's clothing"){
-        this.Men = true;
-        this.Women = false;
-        this.Neither =false;
-      } else {
-        this.Neither =true;
-        this.Women = false;
-        this.Men = false;
-      }
-    }
-  },
-  created() {
-    this.fetchData();
-    this.changeClass();
-  }
+    methods: {
+        async fetchData() {
+            this.loading = true;
+            try {
+                if (this.productIndex < 20) {
+                    ++this.productIndex;
+                }
+                else {
+                    this.productIndex = 1;
+                }
+                const { data } = await axios({
+                    url: `https://fakestoreapi.com/products/${this.productIndex}`,
+                    method: "get",
+                });
+                this.product = data;
+                this.loading = false;
+                this.changeClass();
+                this.displayRating() 
+            }
+            catch (error) {
+                console.log(error);
+            }
+        },
+        changeClass() {
+            if (this.product.category === "women's clothing") {
+                this.women = true;
+                this.men = false;
+                this.neither = false;
+            }
+            else if (this.product.category === "men's clothing") {
+                this.men = true;
+                this.women = false;
+                this.neither = false;
+            }
+            else {
+                this.neither = true;
+                this.women = false;
+                this.men = false;
+            }
+        },
+        displayRating() {
+            this.oneStar = false
+            this.twoStar = false
+            this.threeStar = false
+            this.fourStar = false
+            this.fiveStar = false
+            if(this.product.rating.rate >= 4.5) {
+                this.oneStar = true
+                this.twoStar = true
+                this.threeStar = true
+                this.fourStar = true
+                this.fiveStar = true
+            } else if(this.product.rating.rate >= 3.5) {
+                this.oneStar = true
+                this.twoStar = true
+                this.threeStar = true
+                this.fourStar = true
+            } else if(this.product.rating.rate >= 2.5) {
+                this.oneStar = true
+                this.twoStar = true
+                this.threeStar = true
+            } else if(this.product.rating.rate >= 1.5) {
+                this.oneStar = true
+                this.twoStar = true
+            } else if(this.product.rating.rate >= 0.5) {
+                this.oneStar = true
+            }
+        }
+    },
+    created() {
+        this.fetchData();
+        this.changeClass();
+      },
+    components: { UnavailableView, DetailComponent, ImageComponent }
 }
 </script>
 
 <template>
-  <div class="container" :class="{bgWomen: Women, bgMen: Men, bgNeither: Neither, bgPattern: Men||Women}">
-    <div class="card" :class="{sadFace: Neither}">
-      <div v-if="Men||Women" class="image" :class="{bgNeither: Neither}">
-        <img 
-          :src="this.product.image" 
-          :alt="this.product.title"
-        >
-      </div>
-      <div v-if="Men||Women" class="detail">
-        <div class="title">
-          <h1 :class="{colorMen: Men, colorWomen: Women}">{{ product.title }}</h1>
-        </div>
-        <div class="sub-title">
-          <div class="category">
-            <p>{{ product.category }}</p>
-          </div>
-          <div class="rating">
-            <p>{{ product.rating.rate }}/5</p>
-          </div>
-        </div>
-        <hr class="line">
-        <div class="desc">
-          <p>{{ product.description }}</p>
-        </div>
-        <hr class="line">
-        <div class="price">
-          <p :class="{colorMen: Men, colorWomen: Women}">${{ product.price }}</p>
-        </div>
-        <div class="button-container">
-          <div class="buy" :class="{colorMen: Men, colorWomen: Women, buttonMen: Men, buttonWomen: Women}">
-            <p>Buy now</p> 
-          </div>
-          <div class="next" @click="fetchData" :class="{colorMen: Men, colorWomen: Women, colorNeither: Neither}">
-            <p>Next product</p> 
-          </div>
-        </div>
-      </div>
-      <div v-if="Neither" class="unavailable">
-        <p>This product is unavailable to show</p>
-        <div class="next-unavailable" @click="fetchData" :class="{colorNeither: Neither}">
-          <p>Next product</p> 
-        </div>
-      </div>
+  <div 
+    class="container" 
+    :class="{bgWomen: women, bgMen: men, bgNeither: neither, bgPattern: men||women}"
+  >
+    <div 
+    class="card" 
+    :class="{sadFace: neither}"
+    >
+      <ImageComponent 
+        v-bind="product" 
+        :men="men" 
+        :women="women" 
+        :neither="neither"
+      >
+      </ImageComponent>
+      <DetailComponent 
+        v-bind="product" 
+        :men="men" 
+        :women="women" 
+        :neither="neither"
+        :oneStar="oneStar" 
+        :twoStar="twoStar" 
+        :threeStar="threeStar" 
+        :fourStar="fourStar" 
+        :fiveStar="fiveStar" 
+        @fetchData="fetchData"
+      >
+      </DetailComponent>
+      <UnavailableView 
+        :neither="neither" 
+        @fetchData="fetchData"
+      >
+      </UnavailableView>
     </div>
   </div>
   <div v-if="loading" id="loader"></div>
@@ -108,49 +138,14 @@ export default{
 
 <style scoped>
 
-/* conditional class */
-.colorWomen {
-  color: var(--pink)
-}
-.colorMen {
-  color: var(--blue);
-}
-.colorNeither {
-  color: var(--text-title);
-}
-.bgWomen {
-  background-color: var(--bg-women);
-}
-.bgPattern {
-  background-image: url(./assets/bg-pattern.svg);
-}
-.sadFace {
-  background-image: url(./assets/sad-face.png);
-  background-repeat: no-repeat;
-  background-position: 50% 50%;
-}
-.bgMen {
-  background-color: var(--bg-men);
-}
-.bgNeither {
-  background-color: var(--bg-neither);
-}
-.buttonMen {
-  background-color: var(--blue);
-}
-.buttonWomen {
-  background-color: var(--pink);
-}
-/* ------------------------------------------------------------- */
-
 .container {
-  max-height: 70vh;
+  max-height: 60vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .card {
-  margin-top: 28vh;
+  margin-top: 36vh;
   /* display: flex;
   justify-content: center;
   align-items: flex-start; */
@@ -159,136 +154,5 @@ export default{
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
   background-color: var(--white);
-}
-
-.line {
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  width: 100%;
-}
-
-.card .image {
-  float: left;
-  width: 35%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-}
-.card .image img {
-  padding: 50px;
-  max-height: 100%;
-  max-width: 80%;
-  object-fit: contain;
-}
-
-.card .detail {
-  float: right;
-  width: 60%;
-  display: flex;
-  flex-direction: column;
-  margin-right: 50px;
-}
-.card .detail .title{
-  height: 12vh;
-  overflow: hidden;
-}
-.card .detail .title p{
-  font-size: 28px;
-  font-weight: 600;
-}
-
-.card .detail .sub-title {
-  display: flex;
-  justify-content: space-between;
-}
-.card .detail .sub-title p{
-  font-size: 18px;
-  font-weight: 400;
-  color: var(--text-title);
-  margin-top: 0;
-  margin-bottom: 0;
-}
-.card .detail .desc {
-  height: 35vh;
-  overflow: hidden;
-}
-.card .detail .desc p{
-  font-size: 20px;
-  font-weight: 400;
-  color: var(--text-desc);
-}
-.card .detail .price {
-  margin: 5px 0;
-}
-.card .detail .price p{
-  font-size: 28px;
-  font-weight: 600;
-  margin: 0;
-}
-
-.card .detail .button-container {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  margin-top: 10px;
-}
- .buy {
-  display: flex;
-  justify-content: center;
-  border: 3px solid;
-  border-radius: 4px;
-  padding: 10px;
-  width: 100%;
-  margin-right: 20px;
-}
- .next   {
-  display: flex;
-  justify-content: center;
-  border: 3px solid;
-  border-radius: 4px;
-  padding: 10px;
-  width: 100%;
-  margin-left: 20px;
-}
-.buy p, .next p {
-  margin: 0 auto;
-  font-size: 20px;
-  font-weight: 600;
-}
-
-.buy p {
-  color: var(--white);
-}
-.buy:hover, .next:hover {
-  cursor: pointer;
-}
-
-.unavailable {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-}
-.unavailable p{
-  font-size: 20px;
-  font-weight: 400;
-}
-
-.next-unavailable {
-  display: flex;
-  justify-content: center;
-  border: 3px solid;
-  border-radius: 4px;
-  padding: 10px;
-  width: 50%;
-}
-.next-unavailable p{
-  margin: 0 auto;
-  font-size: 20px;
-  font-weight: 600;
-}
-
-.next-unavailable:hover {
-  cursor: pointer;
 }
 </style>

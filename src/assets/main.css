@@ -19,6 +19,46 @@ body {
   margin: 0 auto ;
 }
 
+.line {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  width: 100%;
+}
+
+/* conditional class */
+.colorWomen {
+  color: var(--pink)
+}
+.colorMen {
+  color: var(--blue);
+}
+.colorNeither {
+  color: var(--text-title);
+}
+.bgWomen {
+  background-color: var(--bg-women);
+}
+.bgMen {
+  background-color: var(--bg-men);
+}
+.bgPattern {
+  background-image: url(bg-pattern.svg);
+}
+.bgNeither {
+  background-color: var(--bg-neither);
+}
+.sadFace {
+  background-image: url(sad-face.png);
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+}
+.buttonMen {
+  background-color: var(--blue);
+}
+.buttonWomen {
+  background-color: var(--pink);
+}
+/* ----------------------------------------------------- */
+
 /* Loader style */
 #loader {
   position: absolute;
