@@ -1,14 +1,14 @@
 # ecommerce-catalog
 
-This template should help get you started developing with Vue 3 in Vite.
+Final Task - Core Initiative Frontend Virtual Internship Program by <a href="https://www.rakamin.com/">Rakamin Academy</a>
 
-## Recommended IDE Setup
+## Overview
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+<img src="https://github.com/royanagist/ecommerce-catalog/blob/master/public/men's page.png?raw=true" alt="overview" width="100%"/>
 
-## Customize configuration
+<img src="https://github.com/royanagist/ecommerce-catalog/blob/master/public/women's page.png?raw=true" alt="overview" width="100%"/>
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+<img src="https://github.com/royanagist/ecommerce-catalog/blob/master/public/unavailable page.png?raw=true" alt="overview" width="100%"/>
 
 ## Project Setup
 
