@@ -7,12 +7,15 @@ export default{
       Women: false,
       Men: false,
       Neither: false,
-      productIndex: 5,
+      productIndex: 1,
       product: {},
+      loading: false,
     }
   },
   methods: {
     async fetchData() {
+      this.loading = true;
+      console.log(this.loading);
       try {
         if (this.productIndex < 20) {
           ++this.productIndex ;
@@ -23,9 +26,10 @@ export default{
           url: `https://fakestoreapi.com/products/${this.productIndex}`,
           method: "get",
         });
-        this.product = data
+        this.product = data;
+        this.loading = false;
         this.changeClass();
-        console.log(this.product);
+        console.log(this.loading);
       } catch (error) {
         console.log(error);
       }
@@ -99,6 +103,7 @@ export default{
       </div>
     </div>
   </div>
+  <div v-if="loading" id="loader"></div>
 </template>
 
 <style scoped>
