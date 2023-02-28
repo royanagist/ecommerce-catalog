@@ -139,16 +139,13 @@ export default{
 <style scoped>
 
 .container {
-  max-height: 60vh;
+  max-height: 65vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .card {
   margin-top: 36vh;
-  /* display: flex;
-  justify-content: center;
-  align-items: flex-start; */
   width: 80%;
   height: 70vh;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
