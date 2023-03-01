@@ -20,14 +20,14 @@ export default {
 </template>
 
 <style scoped>
-.card .image {
+.image {
   float: left;
   width: 35%;
   height: 100%;
   display: flex;
   justify-content: center;
 }
-.card .image img {
+.image img {
   padding: 50px;
   max-height: 100%;
   max-width: 80%;

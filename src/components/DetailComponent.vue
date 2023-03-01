@@ -53,36 +53,45 @@ export default {
         <div class="price">
             <p :class="{colorMen: men, colorWomen: women}">${{ price }}</p>
         </div>
-        <ButtonContainer :men="men" :women="women" :neither="neither" @fetchData="fetchData"></ButtonContainer>
+        <ButtonContainer 
+            :men="men" 
+            :women="women" 
+            :neither="neither" 
+            @fetchData="fetchData"
+        >
+        </ButtonContainer>
     </div>
 </template>
 
 <style scoped>
-.card .detail {
+.detail {
   float: right;
   width: 60%;
   display: flex;
   flex-direction: column;
   margin-right: 50px;
 }
-.card .detail .title{
+.title{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
   height: 12vh;
   overflow: hidden;
 }
-.card .detail .title p{
+.title h1{
   font-size: 28px;
   font-weight: 600;
 }
 
-.card .detail .sub-title {
+.sub-title {
   display: flex;
   justify-content: space-between;
 }
-.card .detail .sub-title .rating{
+.sub-title .rating{
   display: flex;
   justify-content: space-between;
 }
-.card .detail .sub-title .circle{
+.sub-title .circle{
   display: flex;
   justify-content: space-between;
   margin: 1px;
@@ -91,7 +100,7 @@ export default {
   border-radius: 50%;
   border: 1px solid;
 }
-.card .detail .sub-title p{
+.sub-title p{
   font-size: 18px;
   font-weight: 400;
   color: var(--text-title);
@@ -99,19 +108,19 @@ export default {
   margin-bottom: 0;
   margin-right: 7px;
 }
-.card .detail .desc {
+.desc {
   height: 33vh;
   overflow: hidden;
 }
-.card .detail .desc p{
+.desc p{
   font-size: 20px;
   font-weight: 400;
   color: var(--text-desc);
 }
-.card .detail .price {
+.price {
   margin: 5px 0;
 }
-.card .detail .price p{
+.price p{
   font-size: 28px;
   font-weight: 600;
   margin: 0;

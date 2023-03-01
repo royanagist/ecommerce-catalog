@@ -24,20 +24,21 @@ export default{
         async fetchData() {
             this.loading = true;
             try {
-                if (this.productIndex < 20) {
-                    ++this.productIndex;
-                }
-                else {
-                    this.productIndex = 1;
-                }
-                const { data } = await axios({
-                    url: `https://fakestoreapi.com/products/${this.productIndex}`,
+              const { data } = await axios({
+                url: `https://fakestoreapi.com/products/${this.productIndex}`,
                     method: "get",
                 });
                 this.product = data;
                 this.loading = false;
                 this.changeClass();
                 this.displayRating() 
+
+                if (this.productIndex < 20) {
+                    ++this.productIndex;
+                }
+                else {
+                    this.productIndex = 1;
+                }
             }
             catch (error) {
                 console.log(error);
@@ -61,37 +62,36 @@ export default{
             }
         },
         displayRating() {
-            this.oneStar = false
-            this.twoStar = false
-            this.threeStar = false
-            this.fourStar = false
-            this.fiveStar = false
+            this.oneStar = false;
+            this.twoStar = false;
+            this.threeStar = false;
+            this.fourStar = false;
+            this.fiveStar = false;
             if(this.product.rating.rate >= 4.5) {
-                this.oneStar = true
-                this.twoStar = true
-                this.threeStar = true
-                this.fourStar = true
-                this.fiveStar = true
+                this.oneStar = true;
+                this.twoStar = true;
+                this.threeStar = true;
+                this.fourStar = true;
+                this.fiveStar = true;
             } else if(this.product.rating.rate >= 3.5) {
-                this.oneStar = true
-                this.twoStar = true
-                this.threeStar = true
-                this.fourStar = true
+                this.oneStar = true;
+                this.twoStar = true;
+                this.threeStar = true;
+                this.fourStar = true;
             } else if(this.product.rating.rate >= 2.5) {
-                this.oneStar = true
-                this.twoStar = true
-                this.threeStar = true
+                this.oneStar = true;
+                this.twoStar = true;
+                this.threeStar = true;
             } else if(this.product.rating.rate >= 1.5) {
-                this.oneStar = true
-                this.twoStar = true
+                this.oneStar = true;
+                this.twoStar = true;
             } else if(this.product.rating.rate >= 0.5) {
-                this.oneStar = true
+                this.oneStar = true;
             }
         }
     },
     created() {
         this.fetchData();
-        this.changeClass();
       },
     components: { UnavailableView, DetailComponent, ImageComponent }
 }

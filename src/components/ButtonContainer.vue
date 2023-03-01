@@ -25,13 +25,13 @@ export default {
 </template>
 
 <style scoped>
-.card .detail .button-container {
+.button-container {
   display: flex;
   width: 100%;
   justify-content: space-between;
   margin-top: 10px;
 }
- .buy {
+.buy {
   display: flex;
   justify-content: center;
   border: 3px solid;
@@ -40,7 +40,7 @@ export default {
   width: 100%;
   margin-right: 20px;
 }
- .next   {
+.next   {
   display: flex;
   justify-content: center;
   border: 3px solid;
