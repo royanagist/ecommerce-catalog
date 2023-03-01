@@ -41,13 +41,13 @@ body {
   background-color: var(--bg-men);
 }
 .bgPattern {
-  background-image: url(bg-pattern.svg);
+  background-image: url(../bg-pattern.svg);
 }
 .bgNeither {
   background-color: var(--bg-neither);
 }
 .sadFace {
-  background-image: url(sad-face.png);
+  background-image: url(../sad-face.png);
   background-repeat: no-repeat;
   background-position: 50% 50%;
 }
